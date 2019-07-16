@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "MGBQuakeFetcher.h"
+#import "MGBQuake.h"
 
 @interface ViewController ()
 
@@ -16,7 +18,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    MGBQuakeFetcher *quakeFetcher = [[MGBQuakeFetcher alloc] init];
+    [quakeFetcher fetchQuakesWithCompletionBlock:^(NSArray * _Nonnull quakes, NSError * _Nonnull error) {
+        NSLog(@"Count: %lu", quakes.count);
+        for (MGBQuake *quake in quakes) {
+            NSLog(@"%@", quake);
+        }
+    }];
 }
 
 
